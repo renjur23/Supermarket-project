@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Category
+{% endblock %}
+
+{% block content %}
+ {% load static %}
+ <div class="container text-center" style="background-color: white; padding-top: 10px; padding-bottom: 10px;display: flex; flex-wrap: wrap;">
+   {% for i in categories %}
+     <div class="card" style="width: 20rem; text-align:left;display: inline-block; margin-left: 30px;">
+       <img src="{% if i.cat_image%}{{ i.cat_image.url }}{% else %}{% static 'images/default.png' %} {% endif %}" class="card-img-top" style="height:250px;width: 100%;" alt="...">
+       <div class="card-body">
+        <h5>{{ i.cat_name }}</h5>
+         <p style="font-family:Georgia, serif;font-weight:bolder;font-size:medium;color:black;"class="card-text">{{ i.cat_spec }}</p>
+         <a href="{% url 'products_by_category' category_slug=i.slug %}"> <button type="button" class="btn btn-primary">View Products</button></a>    </div>
+       
+     </div>
+     {% comment %} <div class="card-footer">
+      <small class="text-muted">Last Updated{{category.updated}}</small>
+     </div> {% endcomment %}
+   {% endfor %}
+ </div>
+{% endblock %}

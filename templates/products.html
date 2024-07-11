@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Products
+{% endblock %}
+
+{% block content %}
+{% load static %}
+<div class="container text-center" style="background-color: white; padding: 10px; display: flex; gap: 10px; flex-wrap: wrap;">
+  {% for i in products %}
+    <div class="card" style="width: 20rem; text-align: left; display: inline-block; margin-left: 30px;">
+      <img src="{% if i.pro_image %}{{ i.pro_image.url }}{% else %}{% static 'images/default.png' %}{% endif %}" class="card-img-top" style="height: 250px; width: 100%;" alt="Product Image">
+      <div class="card-body">
+        <h5>{{ i.pro_name }}</h5>
+        <p class="card-text" style="font-family: Georgia, serif; font-weight: normal; font-size: medium; color: black;">Price: {{ i.pro_amount }}</p>
+        <a href="{% url 'products_detail'  slug=i.slug %}" class="btn btn-primary">View Details</a>
+      </div>
+    </div>
+  {% endfor %}
+</div>
+{% endblock %} 
